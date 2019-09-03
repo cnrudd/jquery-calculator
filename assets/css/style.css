@@ -6,3 +6,6 @@
 .btn.operator {
     width: 36px;
 }
+.btn.equal {
+    width: 100%;
+}

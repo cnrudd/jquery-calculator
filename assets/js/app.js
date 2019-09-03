@@ -17,7 +17,7 @@
         $(document).on('keydown', function(evt) {
             var key = evt.key;
    
-            if (/\d/.test(key)) {
+            if (/[\d.]/.test(key)) {
                 storeNumbers(evt);
                 return;
             }
@@ -59,13 +59,23 @@
   
           if (!operation) {
             numb1 += numb;
-            $('#first-number').html(numbro(numb1).format({thousandSeparated: true}))
+            displayNumber(numb1, '#first-number');
           } else {
             numb2 += numb;
-            $('#second-number').html(numbro(numb2).format({thousandSeparated: true}))
+            displayNumber(numb2, '#second-number');
           }
         }
   
+        function displayNumber(numb, divSel) {
+            var formatted;
+            if (/\.$/.test(numb)) {
+                formatted = numbro(numb.replace(/\.$/, '')).format({thousandSeparated: true}) + '.';
+            } else {
+                formatted = numbro(numb).format({thousandSeparated: true});
+            }
+            $(divSel).html(formatted);
+        }
+
         function storeOperator(evt) {
           // ignore operator button if there is previously solved operation
           if (solved) return;
@@ -94,8 +104,8 @@
           // ignore equal button if either number is empty
           if (numb1 === '' || numb2 === '') return;
   
-          numb1 = parseInt(numb1, 10);
-          numb2 = parseInt(numb2, 10);
+          numb1 = parseFloat(numb1);
+          numb2 = parseFloat(numb2);
   
           var result;
   
