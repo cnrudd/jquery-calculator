@@ -68,7 +68,9 @@
   
         function displayNumber(numb, divSel) {
             var formatted;
-            if (/\.$/.test(numb)) {
+            if (numb === '.') {
+              formatted = numb;
+            } else if (/\.$/.test(numb)) {
                 formatted = numbro(numb.replace(/\.$/, '')).format({thousandSeparated: true}) + '.';
             } else {
                 formatted = numbro(numb).format({thousandSeparated: true});
