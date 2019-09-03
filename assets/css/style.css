@@ -5,6 +5,7 @@
 .btn.number,
 .btn.operator {
     width: 36px;
+    margin-bottom: 4px;
 }
 .btn.equal {
     width: 100%;
