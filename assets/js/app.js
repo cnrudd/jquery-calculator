@@ -14,13 +14,42 @@
         $('#button-clear').on('click', clear);
         $('#button-clear-entry').on('click', clearEntry);
   
+        $(document).on('keydown', function(evt) {
+            var key = evt.key;
+   
+            if (/\d/.test(key)) {
+                storeNumbers(evt);
+                return;
+            }
+
+            if (/[\/\*\+\-\^]/.test(key)) {
+                storeOperator(evt);
+                return;
+            }
+
+            if (/^Enter$/.test(key)) {
+                solve();
+                return;
+            }
+
+            if (/^Delete$/.test(key)) {
+                clear();
+                return;
+            }
+
+            if (/^Backspace$/.test(key)) {
+                clearEntry();
+                return;
+            }
+        });
+
         /**
         *  Define all functions that will
         *  serve as click handlers.
         */
   
-        function storeNumbers() {
-          var numb = this.value;
+        function storeNumbers(evt) {
+          var numb = evt.type == 'keydown' ? evt.key : this.value;
   
           // if already solved a previous set,
           // clear calculator to start a new set
@@ -37,15 +66,28 @@
           }
         }
   
-        function storeOperator() {
+        function storeOperator(evt) {
           // ignore operator button if there is previously solved operation
           if (solved) return;
   
           // ignore operator first number is empty
           if (numb1 === '') return;
   
-          operation = this.value;
-          $('#operator').html(this.innerText)
+          var btn;
+          if (evt.type == 'keydown') {
+              switch (evt.key) {
+                  case '-': btn = $('#button-minus')[0]; break;
+                  case '+': btn = $('#button-plus')[0]; break;
+                  case '*': btn = $('#button-multiply')[0]; break;
+                  case '/': btn = $('#button-divide')[0]; break;
+                  case '^': btn = $('#button-power')[0]; break;
+              }
+          } else {
+              btn = this;
+          }
+         
+          operation = btn.value;
+          $('#operator').html(btn.innerText)
         }
   
         function solve() {
@@ -85,6 +127,8 @@
             if (numb2 != ''){
                 numb2 = '';
                 $('#second-number').html(null);
+                $('#result').html(null);
+                solved = false;
                 return;
             }
 
@@ -100,6 +144,7 @@
                 return;
             }
 
+          
           }
 
       });
