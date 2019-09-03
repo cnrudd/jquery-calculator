@@ -11,17 +11,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <!-- Added a link to our external stylesheet-->
-  <link rel="stylesheet" href="style.css">
-ß
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-
-  <!-- Jumbotron for Title -->
-  <div class="jumbotron">
-    <h1 class="text-center">jQuery Calculator</h1>
-    <h3 class="text-center">Perform basic mathematic operations using the power of jQuery!</h3>
-  </div>
 
   <div class="container">
 
@@ -83,95 +76,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-  <script type="text/javascript">
-
-
-    $(document).ready(function () {
-      // declare variables available to all functions that follow below
-      // (these are not globals on window.global)
-      var numb1 = '';
-      var numb2 = '';
-      var operation = '';
-      var solved = false;
-
-      // set up click handlers on all buttons
-      $('.number').on('click', storeNumbers);
-      $('.operator').on('click', storeOperator);
-      $('#button-equal').on('click', solve);
-      $('#button-clear').on('click', clear);
-
-
-      /**
-      *  Define all functions that will
-      *  serve as click handlers.
-      */
-
-      function storeNumbers() {
-        var numb = this.value;
-
-        // if already solved a previous set,
-        // clear calculator to start a new set
-        if (solved) {
-          clear();
-        }
-
-        if (!operation) {
-          numb1 += numb;
-          $('#first-number').html(numb1)
-        } else {
-          numb2 += numb;
-          $('#second-number').html(numb2)
-        }
-      }
-
-      function storeOperator() {
-        // ignore operator button if there is previously solved operation
-        if (solved) return;
-
-        // ignore operator first number is empty
-        if (numb1 === '') return;
-
-        operation = this.value;
-        $('#operator').html(this.innerText)
-      }
-
-      function solve() {
-        // ignore equal button if either number is empty
-        if (numb1 === '' || numb2 === '') return;
-
-        numb1 = parseInt(numb1, 10);
-        numb2 = parseInt(numb2, 10);
-
-        var result;
-
-        switch (operation) {
-          case 'plus': result = numb1 + numb2; break;
-          case 'minus': result = numb1 - numb2; break;
-          case 'divide': result = numb1 / numb2; break;
-          case 'times': result = numb1 * numb2; break;
-          case 'power': result = Math.pow(numb1, numb2); break;
-
-        }
-        $('#result').html(result);
-        solved = true;
-      }
-
-      function clear() {
-        numb1 = '';
-        numb2 = '';
-        operation = '';
-        solved = false;
-
-        $('#first-number').html(null);
-        $('#second-number').html(null);
-        $('#operator').html(null);
-        $('#result').html(null);
-      }
-
-    });
-
-
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numbro/2.0.5/numbro.min.js"
+    integrity="sha256-EZIAV1GkrWuX1rAOBRui/RBVLJEN+I8jvsY3EW+oCqA=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
 
 </body>
 
