@@ -1,3 +1,7 @@
+.card-body{
+    width: 197px;
+    margin: auto;
+}
 .btn.number,
 .btn.operator {
     width: 36px;
