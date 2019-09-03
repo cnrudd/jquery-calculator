@@ -104,17 +104,17 @@
           // ignore equal button if either number is empty
           if (numb1 === '' || numb2 === '') return;
   
-          numb1 = parseFloat(numb1);
-          numb2 = parseFloat(numb2);
+          var n1 = new BigNumber(numb1);
+          var n2 = parseFloat(numb2);
   
           var result;
   
           switch (operation) {
-            case 'plus': result = numb1 + numb2; break;
-            case 'minus': result = numb1 - numb2; break;
-            case 'divide': result = numb1 / numb2; break;
-            case 'times': result = numb1 * numb2; break;
-            case 'power': result = Math.pow(numb1, numb2); break;
+            case 'plus': result = n1.plus(n2); break;
+            case 'minus': result = n1.minus(n2); break;
+            case 'divide': result = n1.dividedBy(n2); break;
+            case 'times': result = n1.multipliedBy(n2); break;
+            case 'power': result = n1.exponentiatedBy(n2); break;
   
           }
           $('#result').html(numbro(result).format({thousandSeparated: true}));
