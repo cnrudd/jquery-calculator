@@ -12,7 +12,7 @@
         $('.operator').on('click', storeOperator);
         $('#button-equal').on('click', solve);
         $('#button-clear').on('click', clear);
-  
+        $('#button-clear-entry').on('click', clearEntry);
   
         /**
         *  Define all functions that will
@@ -81,4 +81,25 @@
           $('#result').html(null);
         }
   
+        function clearEntry() {
+            if (numb2 != ''){
+                numb2 = '';
+                $('#second-number').html(null);
+                return;
+            }
+
+            if (operation != ''){
+                operation = '';
+                $('#operator').html(null);
+                return;
+            }
+
+            if (numb1 != ''){
+                numb1 = '';
+                $('#first-number').html(null);
+                return;
+            }
+
+          }
+
       });
